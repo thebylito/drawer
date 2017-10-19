@@ -38,7 +38,7 @@ const PrimaryNav = StackNavigator({
   pagina1: { screen: Pagina1 },
   pagina2: { screen: Pagina2 },
 
-})
+}) 
 
 export default App = props => (
   <PrimaryNav />
