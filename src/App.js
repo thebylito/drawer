@@ -1,11 +1,20 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
-import Screen1Screen from './screens/Screen1Screen'
-import Screen2Screen from './screens/Screen2Screen'
-import Screen3Screen from './screens/Screen3Screen'
-import Screen4Screen from './screens/Screen4Screen'
 
+/* Aqui é a página INICIAL do seu APP depois de ter autenticado*/
+import HomeScreen from './screens/HomeScreen'
+
+/* Aqui é a página interna da INICIAL, se necessário no seu APP*/
+import HomeInternaScreen from './screens/HomeInternaScreen'
+
+/* Aqui é a página de SERVIÇOS por exemplo */
+import ServicosScreen from './screens/ServicosScreen'
+
+/* Aqui é a página interna da SERVIÇOS, se necessário no seu APP*/
+import ServicosInternaScreen from './screens/ServicosInternaScreen'
+
+/* Aqui configuramos o iconezinho de MENU no canto superior esquerdo do APP*/
 const botaoMenu = (navigation) => (
   <TouchableOpacity
     onPress={() => {
@@ -16,41 +25,56 @@ const botaoMenu = (navigation) => (
   </TouchableOpacity>
 )
 
-const Telas1e2 = StackNavigator({
-  screen1Screen: {
-    screen: Screen1Screen,
+
+/* Aqui configuramos a PILHA (Stack) de páginas da HOME e suas internas*/
+const HomeStack = StackNavigator({
+  homeScreen: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: HomeScreen,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 1',
+      title: 'Home',
       headerLeft: botaoMenu(navigation)
     })
   },
-  screen2Screen: {
-    screen: Screen2Screen,
+  homeInternaScreen: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: HomeInternaScreen,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 2'
+      title: 'Interna da Home'
     })
   }
 })
 
-const Telas3e4 = StackNavigator({
-  screen3Screen: {
-    screen: Screen3Screen,
+/* Aqui configuramos a PILHA (Stack) de páginas da SERVIÇOS e suas internas*/
+
+const ServicosStack = StackNavigator({
+  servicosScreen: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: ServicosScreen,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 3',
+      /* Aqui fica o titulo da pagina */
+      title: 'Serviços',
+      
+      /* Aqui fica o elemento da esquerda do header de navegacao, la onde fica o titulo da pagina */
       headerLeft: botaoMenu(navigation)
     })
   },
-  screen4Screen: {
-    screen: Screen4Screen,
+  servicosInternaScreen: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: ServicosInternaScreen,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 4'
+      title: 'Interna de Serviços'
     })
   }
 })
 
 const DrawerStack = DrawerNavigator({
-  telas1e2: { screen: Telas1e2 },
-  telas3e4: { screen: Telas3e4 },
+  homeStack: { screen: HomeStack },
+  servicosStack: { screen: ServicosStack },
 })
 
 const DrawerNavigation = StackNavigator({
@@ -63,13 +87,15 @@ const DrawerNavigation = StackNavigator({
       gesturesEnabled: true,
     })
   })
-/////////////////////// NAO E NECESSARIO AGORA, MAS VAMOS USAR MAIS PRA FRENTE, POR ISSO JA FIZ ELE
+
 const PrimaryNav = StackNavigator({
   drawerStack: { screen: DrawerNavigation },
 }, {
-    headerMode: 'none'
+    headerMode: 'none',
+    navigationOptions: ({ navigation }) => ({
+    })
   })
-///////////////////////////////////////////////////
+
 export default App = props => (
   <PrimaryNav />
 );
