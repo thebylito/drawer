@@ -43,8 +43,8 @@ class Pagina3 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('pagina4')}>
-        Pagina 3 - Clique para ir para pagina 4
+        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('pagina4')}>
+          Pagina 3 - Clique para ir para pagina 4
         </Text>
       </View>
     );
@@ -60,8 +60,8 @@ class Pagina4 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Pagina 4
+        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('pagina2')}>
+          Pagina 4 - Ir para 2
         </Text>
       </View>
     );
@@ -69,19 +69,13 @@ class Pagina4 extends Component {
 }
 
 const botaoMenu = (navigation) => (
-	<TouchableOpacity
-		onPress={() => {
-      console.log(navigation)
+  <TouchableOpacity
+    onPress={() => {
       navigation.navigate('DrawerToggle')
-      console.log(navigation)
-			if (navigation.state.index === 0) {
-			} else {
-				navigation.navigate('DrawerClose')
-			}
-		}}
-		style={{ flex: 0, paddingLeft: 15 }}>
-		<Text>Menu</Text>
-	</TouchableOpacity>
+    }}
+    style={{ flex: 0, paddingLeft: 15 }}>
+    <Text>Menu</Text>
+  </TouchableOpacity>
 )
 
 const Telas1e2 = StackNavigator({
@@ -121,9 +115,9 @@ const DrawerStack = DrawerNavigator({
   telas3e4: { screen: Telas3e4 },
 })
 
-  const DrawerNavigation = StackNavigator({
-    DrawerStack: { screen: DrawerStack },
-  }, {
+const DrawerNavigation = StackNavigator({
+  DrawerStack: { screen: DrawerStack },
+}, {
     headerMode: 'none',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: '#004274' },
@@ -141,7 +135,7 @@ const PrimaryNav = StackNavigator({
   })
 
 export default App = props => (
-  <PrimaryNav />
+  <DrawerNavigation />
 );
 
 
