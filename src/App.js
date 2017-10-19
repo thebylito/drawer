@@ -26,7 +26,7 @@ class HomeInterna extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Pagina 2
+        Ir para a screen Home
         </Text>
       </View>
     );
@@ -41,7 +41,7 @@ class Servicos extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('servicosinterna')}>
-        Ir para a screen Interna de Serviços 2
+        Ir para a screen Interna de Serviços
         </Text>
       </View>
     );
@@ -56,7 +56,7 @@ class ServicosInterna extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('servicos')}>
-          Pagina 4 - Ir para 2
+        Ir para a screen de Serviços
         </Text>
       </View>
     );
