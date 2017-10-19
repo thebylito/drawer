@@ -11,7 +11,7 @@ class Home extends Component {
         <Text style={styles.welcome} onPress={() => {
           this.props.navigation.navigate('homeinterna', { nome: 'Cake' })
         }}>
-        Ir para a screen Interna de Home
+          Ir para a screen Interna de Home
         </Text>
       </View>
     );
@@ -21,12 +21,7 @@ class Home extends Component {
 /* Aqui é a página interna da INICIAL, se necessário no seu APP*/
 
 class HomeInterna extends Component {
-  /*   constructor(props) {
-      super(props)
-    } */
-  componentWillMount() {
-    console.log(this.props)
-  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -41,17 +36,12 @@ class HomeInterna extends Component {
 /* Aqui é a página de SERVIÇOS por exemplo */
 
 class Servicos extends Component {
-  /*   constructor(props) {
-      super(props)
-    } */
-  componentWillMount() {
-    console.log(this.props)
-  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('servicosinterna')}>
-        Ir para a screen Interna de Serviços
+        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('servicosinterna')}>
+          Ir para a screen Interna de Serviços
         </Text>
       </View>
     );
@@ -61,16 +51,11 @@ class Servicos extends Component {
 /* Aqui é a página interna da SERVIÇOS, se necessário no seu APP*/
 
 class ServicosInterna extends Component {
-  /*   constructor(props) {
-      super(props)
-    } */
-  componentWillMount() {
-    console.log(this.props)
-  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('servicos')}>
+        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('servicos')}>
           Pagina 4 - Ir para 2
         </Text>
       </View>
@@ -81,19 +66,13 @@ class ServicosInterna extends Component {
 /* Aqui configuramos o iconezinho de MENU no canto superior esquerdo do APP*/
 
 const botaoMenu = (navigation) => (
-	<TouchableOpacity
-		onPress={() => {
-      console.log(navigation)
+  <TouchableOpacity
+    onPress={() => {
       navigation.navigate('DrawerToggle')
-      console.log(navigation)
-			if (navigation.state.index === 0) {
-			} else {
-				navigation.navigate('DrawerClose')
-			}
-		}}
-		style={{ flex: 0, paddingLeft: 15 }}>
-		<Text>Menu</Text>
-	</TouchableOpacity>
+    }}
+    style={{ flex: 0, paddingLeft: 15 }}>
+    <Text>Menu</Text>
+  </TouchableOpacity>
 )
 
 /* Aqui configuramos a PILHA (Stack) de páginas da HOME e suas internas*/
@@ -145,9 +124,9 @@ const DrawerStack = DrawerNavigator({
   servicosstack: { screen: ServicosStack },
 })
 
-  const DrawerNavigation = StackNavigator({
-    DrawerStack: { screen: DrawerStack },
-  }, {
+const DrawerNavigation = StackNavigator({
+  DrawerStack: { screen: DrawerStack },
+}, {
     headerMode: 'none',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: '#004274' },
