@@ -1,70 +1,20 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
 /* Aqui é a página INICIAL do seu APP depois de ter autenticado*/
-
-class Home extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => {
-          this.props.navigation.navigate('homeinterna', { nome: 'Cake' })
-        }}>
-          Ir para a screen Interna de Home
-        </Text>
-      </View>
-    );
-  }
-}
+import HomeScreen from './screens/HomeScreen'
 
 /* Aqui é a página interna da INICIAL, se necessário no seu APP*/
-
-class HomeInterna extends Component {
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-        Ir para a screen Home
-        </Text>
-      </View>
-    );
-  }
-}
+import HomeInternaScreen from './screens/HomeInternaScreen'
 
 /* Aqui é a página de SERVIÇOS por exemplo */
-
-class Servicos extends Component {
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('servicosinterna')}>
-        Ir para a screen Interna de Serviços
-        </Text>
-      </View>
-    );
-  }
-}
+import ServicosScreen from './screens/ServicosScreen'
 
 /* Aqui é a página interna da SERVIÇOS, se necessário no seu APP*/
-
-class ServicosInterna extends Component {
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('servicos')}>
-        Ir para a screen de Serviços
-        </Text>
-      </View>
-    );
-  }
-}
+import ServicosInternaScreen from './screens/ServicosInternaScreen'
 
 /* Aqui configuramos o iconezinho de MENU no canto superior esquerdo do APP*/
-
 const botaoMenu = (navigation) => (
   <TouchableOpacity
     onPress={() => {
@@ -75,21 +25,21 @@ const botaoMenu = (navigation) => (
   </TouchableOpacity>
 )
 
-/* Aqui configuramos a PILHA (Stack) de páginas da HOME e suas internas*/
 
+/* Aqui configuramos a PILHA (Stack) de páginas da HOME e suas internas*/
 const HomeStack = StackNavigator({
-  home: {
+  homeScreen: {
     /* No screen colocamos o nome do componente que exportamos lá em cima*/
-    screen: Home,
+    screen: HomeScreen,
     /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
       title: 'Home',
       headerLeft: botaoMenu(navigation)
     })
   },
-  homeinterna: {
+  homeInternaScreen: {
     /* No screen colocamos o nome do componente que exportamos lá em cima*/
-    screen: HomeInterna,
+    screen: HomeInternaScreen,
     /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
       title: 'Interna da Home'
@@ -100,18 +50,21 @@ const HomeStack = StackNavigator({
 /* Aqui configuramos a PILHA (Stack) de páginas da SERVIÇOS e suas internas*/
 
 const ServicosStack = StackNavigator({
-  servicos: {
+  servicosScreen: {
     /* No screen colocamos o nome do componente que exportamos lá em cima*/
-    screen: Servicos,
+    screen: ServicosScreen,
     /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
+      /* Aqui fica o titulo da pagina */
       title: 'Serviços',
+      
+      /* Aqui fica o elemento da esquerda do header de navegacao, la onde fica o titulo da pagina */
       headerLeft: botaoMenu(navigation)
     })
   },
-  servicosinterna: {
+  servicosInternaScreen: {
     /* No screen colocamos o nome do componente que exportamos lá em cima*/
-    screen: ServicosInterna,
+    screen: ServicosInternaScreen,
     /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
       title: 'Interna de Serviços'
@@ -120,8 +73,8 @@ const ServicosStack = StackNavigator({
 })
 
 const DrawerStack = DrawerNavigator({
-  homestack: { screen: HomeStack },
-  servicosstack: { screen: ServicosStack },
+  homeStack: { screen: HomeStack },
+  servicosStack: { screen: ServicosStack },
 })
 
 const DrawerNavigation = StackNavigator({
@@ -144,22 +97,5 @@ const PrimaryNav = StackNavigator({
   })
 
 export default App = props => (
-  <DrawerNavigation />
+  <PrimaryNav />
 );
-
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
-});
