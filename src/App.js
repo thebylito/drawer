@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 
 class Pagina1 extends Component {
@@ -67,11 +67,29 @@ class Pagina4 extends Component {
     );
   }
 }
+
+const botaoMenu = (navigation) => (
+	<TouchableOpacity
+		onPress={() => {
+      console.log(navigation)
+      navigation.navigate('DrawerToggle')
+      console.log(navigation)
+			if (navigation.state.index === 0) {
+			} else {
+				navigation.navigate('DrawerClose')
+			}
+		}}
+		style={{ flex: 0, paddingLeft: 15 }}>
+		<Text>Menu</Text>
+	</TouchableOpacity>
+)
+
 const Telas1e2 = StackNavigator({
   pagina1: {
     screen: Pagina1,
     navigationOptions: ({ navigation }) => ({
-      title: 'Pagina 1'
+      title: 'Pagina 1',
+      headerLeft: botaoMenu(navigation)
     })
   },
   pagina2: {
@@ -86,7 +104,8 @@ const Telas3e4 = StackNavigator({
   pagina3: {
     screen: Pagina3,
     navigationOptions: ({ navigation }) => ({
-      title: 'Pagina 3'
+      title: 'Pagina 3',
+      headerLeft: botaoMenu(navigation)
     })
   },
   pagina4: {
@@ -100,10 +119,6 @@ const Telas3e4 = StackNavigator({
 const DrawerStack = DrawerNavigator({
   telas1e2: { screen: Telas1e2 },
   telas3e4: { screen: Telas3e4 },
-},{
-  navigationOptions: ({ navigation }) => ({
-    headerRight: <Text>Oi</Text>
-  })
 })
 
   const DrawerNavigation = StackNavigator({
