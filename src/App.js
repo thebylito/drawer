@@ -6,11 +6,6 @@ import Screen2Screen from './screens/Screen2Screen'
 import Screen3Screen from './screens/Screen3Screen'
 import Screen4Screen from './screens/Screen4Screen'
 
-
-
-
-
-
 const botaoMenu = (navigation) => (
   <TouchableOpacity
     onPress={() => {
@@ -68,15 +63,13 @@ const DrawerNavigation = StackNavigator({
       gesturesEnabled: true,
     })
   })
-
+/////////////////////// NAO E NECESSARIO AGORA, MAS VAMOS USAR MAIS PRA FRENTE, POR ISSO JA FIZ ELE
 const PrimaryNav = StackNavigator({
   drawerStack: { screen: DrawerNavigation },
 }, {
-    headerMode: 'none',
-    navigationOptions: ({ navigation }) => ({
-    })
+    headerMode: 'none'
   })
-
+///////////////////////////////////////////////////
 export default App = props => (
-  <DrawerNavigation />
+  <PrimaryNav />
 );
