@@ -1,72 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
+import Screen1Screen from './screens/Screen1Screen'
+import Screen2Screen from './screens/Screen2Screen'
+import Screen3Screen from './screens/Screen3Screen'
+import Screen4Screen from './screens/Screen4Screen'
 
-class Pagina1 extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => {
-          this.props.navigation.navigate('pagina2', { nome: 'Cake' })
-        }}>
-          Pagina 1 - Clique para ir para pagina 2
-        </Text>
-      </View>
-    );
-  }
-}
 
-class Pagina2 extends Component {
-  /*   constructor(props) {
-      super(props)
-    } */
-  componentWillMount() {
-    console.log(this.props)
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Pagina 2
-        </Text>
-      </View>
-    );
-  }
-}
-class Pagina3 extends Component {
-  /*   constructor(props) {
-      super(props)
-    } */
-  componentWillMount() {
-    console.log(this.props)
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('pagina4')}>
-          Pagina 3 - Clique para ir para pagina 4
-        </Text>
-      </View>
-    );
-  }
-}
-class Pagina4 extends Component {
-  /*   constructor(props) {
-      super(props)
-    } */
-  componentWillMount() {
-    console.log(this.props)
-  }
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('pagina2')}>
-          Pagina 4 - Ir para 2
-        </Text>
-      </View>
-    );
-  }
-}
+
+
+
 
 const botaoMenu = (navigation) => (
   <TouchableOpacity
@@ -79,33 +22,33 @@ const botaoMenu = (navigation) => (
 )
 
 const Telas1e2 = StackNavigator({
-  pagina1: {
-    screen: Pagina1,
+  screen1Screen: {
+    screen: Screen1Screen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Pagina 1',
+      title: 'Screen 1',
       headerLeft: botaoMenu(navigation)
     })
   },
-  pagina2: {
-    screen: Pagina2,
+  screen2Screen: {
+    screen: Screen2Screen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Pagina 2'
+      title: 'Screen 2'
     })
   }
 })
 
 const Telas3e4 = StackNavigator({
-  pagina3: {
-    screen: Pagina3,
+  screen3Screen: {
+    screen: Screen3Screen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Pagina 3',
+      title: 'Screen 3',
       headerLeft: botaoMenu(navigation)
     })
   },
-  pagina4: {
-    screen: Pagina4,
+  screen4Screen: {
+    screen: Screen4Screen,
     navigationOptions: ({ navigation }) => ({
-      title: 'Pagina 4'
+      title: 'Screen 4'
     })
   }
 })
@@ -137,20 +80,3 @@ const PrimaryNav = StackNavigator({
 export default App = props => (
   <DrawerNavigation />
 );
-
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
-});
