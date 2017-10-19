@@ -1,61 +1,153 @@
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
-import Screen1Screen from './screens/Screen1Screen'
-import Screen2Screen from './screens/Screen2Screen'
-import Screen3Screen from './screens/Screen3Screen'
-import Screen4Screen from './screens/Screen4Screen'
+
+/* Aqui é a página INICIAL do seu APP depois de ter autenticado*/
+
+class Home extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome} onPress={() => {
+          this.props.navigation.navigate('homeinterna', { nome: 'Cake' })
+        }}>
+        Ir para a screen Interna de Home
+        </Text>
+      </View>
+    );
+  }
+}
+
+/* Aqui é a página interna da INICIAL, se necessário no seu APP*/
+
+class HomeInterna extends Component {
+  /*   constructor(props) {
+      super(props)
+    } */
+  componentWillMount() {
+    console.log(this.props)
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome}>
+          Pagina 2
+        </Text>
+      </View>
+    );
+  }
+}
+
+/* Aqui é a página de SERVIÇOS por exemplo */
+
+class Servicos extends Component {
+  /*   constructor(props) {
+      super(props)
+    } */
+  componentWillMount() {
+    console.log(this.props)
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('servicosinterna')}>
+        Ir para a screen Interna de Serviços
+        </Text>
+      </View>
+    );
+  }
+}
+
+/* Aqui é a página interna da SERVIÇOS, se necessário no seu APP*/
+
+class ServicosInterna extends Component {
+  /*   constructor(props) {
+      super(props)
+    } */
+  componentWillMount() {
+    console.log(this.props)
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('servicos')}>
+          Pagina 4 - Ir para 2
+        </Text>
+      </View>
+    );
+  }
+}
+
+/* Aqui configuramos o iconezinho de MENU no canto superior esquerdo do APP*/
 
 const botaoMenu = (navigation) => (
-  <TouchableOpacity
-    onPress={() => {
+	<TouchableOpacity
+		onPress={() => {
+      console.log(navigation)
       navigation.navigate('DrawerToggle')
-    }}
-    style={{ flex: 0, paddingLeft: 15 }}>
-    <Text>Menu</Text>
-  </TouchableOpacity>
+      console.log(navigation)
+			if (navigation.state.index === 0) {
+			} else {
+				navigation.navigate('DrawerClose')
+			}
+		}}
+		style={{ flex: 0, paddingLeft: 15 }}>
+		<Text>Menu</Text>
+	</TouchableOpacity>
 )
 
-const Telas1e2 = StackNavigator({
-  screen1Screen: {
-    screen: Screen1Screen,
+/* Aqui configuramos a PILHA (Stack) de páginas da HOME e suas internas*/
+
+const HomeStack = StackNavigator({
+  home: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: Home,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 1',
+      title: 'Home',
       headerLeft: botaoMenu(navigation)
     })
   },
-  screen2Screen: {
-    screen: Screen2Screen,
+  homeinterna: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: HomeInterna,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 2'
+      title: 'Interna da Home'
     })
   }
 })
 
-const Telas3e4 = StackNavigator({
-  screen3Screen: {
-    screen: Screen3Screen,
+/* Aqui configuramos a PILHA (Stack) de páginas da SERVIÇOS e suas internas*/
+
+const ServicosStack = StackNavigator({
+  servicos: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: Servicos,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 3',
+      title: 'Serviços',
       headerLeft: botaoMenu(navigation)
     })
   },
-  screen4Screen: {
-    screen: Screen4Screen,
+  servicosinterna: {
+    /* No screen colocamos o nome do componente que exportamos lá em cima*/
+    screen: ServicosInterna,
+    /* Aqui são as opções do HEADER desta screen */
     navigationOptions: ({ navigation }) => ({
-      title: 'Screen 4'
+      title: 'Interna de Serviços'
     })
   }
 })
 
 const DrawerStack = DrawerNavigator({
-  telas1e2: { screen: Telas1e2 },
-  telas3e4: { screen: Telas3e4 },
+  homestack: { screen: HomeStack },
+  servicosstack: { screen: ServicosStack },
 })
 
-const DrawerNavigation = StackNavigator({
-  DrawerStack: { screen: DrawerStack },
-}, {
+  const DrawerNavigation = StackNavigator({
+    DrawerStack: { screen: DrawerStack },
+  }, {
     headerMode: 'none',
     navigationOptions: ({ navigation }) => ({
       headerStyle: { backgroundColor: '#004274' },
@@ -63,13 +155,32 @@ const DrawerNavigation = StackNavigator({
       gesturesEnabled: true,
     })
   })
-/////////////////////// NAO E NECESSARIO AGORA, MAS VAMOS USAR MAIS PRA FRENTE, POR ISSO JA FIZ ELE
+
 const PrimaryNav = StackNavigator({
   drawerStack: { screen: DrawerNavigation },
 }, {
-    headerMode: 'none'
+    headerMode: 'none',
+    navigationOptions: ({ navigation }) => ({
+    })
   })
-///////////////////////////////////////////////////
+
 export default App = props => (
-  <PrimaryNav />
+  <DrawerNavigation />
 );
+
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  }
+});
