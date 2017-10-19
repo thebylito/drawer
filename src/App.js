@@ -40,13 +40,8 @@ class Servicos extends Component {
   render() {
     return (
       <View style={styles.container}>
-<<<<<<< HEAD
         <Text style={styles.welcome} onPress={()=> this.props.navigation.navigate('servicosinterna')}>
         Ir para a screen Interna de Serviços 2
-=======
-        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('servicosinterna')}>
-          Ir para a screen Interna de Serviços
->>>>>>> df559dcce76d557e5340e260c8737f46c5d3980f
         </Text>
       </View>
     );
