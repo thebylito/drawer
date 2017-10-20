@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { StackNavigator, DrawerNavigator } from 'react-navigation';
+// Adicionado addNavigationHelpers REDUX
+import { StackNavigator, DrawerNavigator, addNavigationHelpers } from 'react-navigation';
+/// Importamos para combinar os reducers
+import { combineReducers, createStore } from 'redux';
+
+import { Provider, connect } from 'react-redux';
 
 /* Aqui é a página INICIAL do seu APP depois de ter autenticado*/
 import HomeScreen from './screens/HomeScreen'
@@ -96,6 +101,52 @@ const PrimaryNav = StackNavigator({
     })
   })
 
-export default App = props => (
+  /// Tiramos, pois a exportacao sera pelo redux
+/* export default App = props => (
   <PrimaryNav />
-);
+); */
+
+
+///// Trocamos os 'AppNavigator' por 'PrimaryNav' pois é essa a nossa navigation base
+const initialState = PrimaryNav.router.getStateForAction(PrimaryNav.router.getActionForPathAndParams('drawerStack'));
+
+const navReducer = (state = initialState, action) => {
+  const nextState = PrimaryNav.router.getStateForAction(action, state);
+
+  // Simply return the original `state` if `nextState` is null or undefined.
+  return nextState || state;
+};
+
+const appReducer = combineReducers({
+  nav: (state, action) => PrimaryNav.router.getStateForAction(action, state)
+});
+
+//// Exemplo de integracao do React-navigation
+class App extends Component {
+  render() {
+    return (
+      <PrimaryNav navigation={addNavigationHelpers({
+        dispatch: this.props.dispatch,
+        state: this.props.nav,
+      })} />
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  nav: state.nav
+});
+
+const AppWithNavigationState = connect(mapStateToProps)(App);
+
+const store = createStore(appReducer);
+
+export default class Root extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
+    );
+  }
+}
