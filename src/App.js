@@ -141,7 +141,7 @@ const AppWithNavigationState = connect(mapStateToProps)(App);
 
 const store = createStore(appReducer);
 
-export default class Root extends Component {
+/* export default class Root extends Component {
   render() {
     return (
       <Provider store={store}>
@@ -149,4 +149,18 @@ export default class Root extends Component {
       </Provider>
     );
   }
-}
+} */
+
+/*  export default Root = (props) => (
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
+    ); */
+
+  export default function MINHA_CASA_E_REDONDA(props) {
+    return(
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
+    )
+  };

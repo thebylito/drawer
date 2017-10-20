@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default class Home extends Component {
+  componentWillMount = () => {
+    console.log(this.props)
+  }
 
   render() {
     return (
+      
       <View style={styles.container}>
         <Text style={styles.welcome} onPress={() => {
           this.props.navigation.navigate('homeInternaScreen')
